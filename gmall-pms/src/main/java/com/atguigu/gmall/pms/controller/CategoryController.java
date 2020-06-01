@@ -55,9 +55,8 @@ public class CategoryController {
      * 信息
      */
     @ApiOperation("详情查询")
-    @GetMapping("/info/{catId}")
-    @PreAuthorize("hasAuthority('pms:category:info')")
-    public Resp<CategoryEntity> info(@PathVariable("catId") Long catId){
+    @GetMapping("{catId}")
+    public Resp<CategoryEntity> queryCategoryById(@PathVariable("catId") Long catId){
 		CategoryEntity category = categoryService.getById(catId);
 
         return Resp.ok(category);
