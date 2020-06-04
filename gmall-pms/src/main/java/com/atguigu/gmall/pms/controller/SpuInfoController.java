@@ -43,7 +43,7 @@ public class SpuInfoController {
     }
     //分页查询SPU列表
     @PostMapping("page")
-    public Resp<List<SpuInfoEntity>> queryspuById(@RequestParam QueryCondition condition){
+    public Resp<List<SpuInfoEntity>> queryspuById(@RequestBody QueryCondition condition){
         PageVo page =  spuInfoService.queryPage(condition);
         List<SpuInfoEntity> list = (List<SpuInfoEntity>)page.getList();
         return Resp.ok(list);
