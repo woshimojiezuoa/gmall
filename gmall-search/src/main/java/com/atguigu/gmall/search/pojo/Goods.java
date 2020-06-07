@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-@Document(indexName="goods",type="info",shards = 3,replicas = 2)
+@Document(indexName="goods2",type="info",shards = 3,replicas = 2)
 public class Goods {
     @Id
     private Long skuId;
