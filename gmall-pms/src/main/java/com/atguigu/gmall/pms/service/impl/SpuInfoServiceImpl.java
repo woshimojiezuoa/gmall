@@ -12,8 +12,10 @@ import com.atguigu.gmall.pms.service.*;
 import dto.SkuSaleDTO;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -55,8 +57,10 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
     private SkuSaleFeign skuSaleFeign;
     @Autowired
     private SkuSaleAttrValueService skuSaleAttrValueService;
-
-
+    @Autowired
+    private AmqpTemplate amqpTemplate;
+    @Value("${item.rabbitmq.exchange}")
+    private String exchangename;
     @Override
     public PageVo queryPage(QueryCondition params) {
         IPage<SpuInfoEntity> page = this.page(
@@ -108,8 +112,13 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         /// 2. 保存sku相关信息
         saveSkuInfoWithSaleInfo(spuInfoVO);
 //        int i=1/0;
-
+        sendMsg("insert",spuInfoVO.getId());
     }
+    //使用rabbitmq向队列发送消息
+    public void sendMsg(String type,Long spuId){
+        amqpTemplate.convertAndSend(exchangename,"item."+type,spuId);
+    }
+
 
     /**
      * 保存sku相关信息及营销信息
