@@ -20,14 +20,18 @@ public interface GmallPmsApi {
     //分页查询SPU
     @PostMapping("pms/spuinfo/page")
     public Resp<List<SpuInfoEntity>> queryspuById(@RequestBody QueryCondition condition);
+    //通过spuid查询spu
+    @GetMapping("pms/spuinfo/info/{id}")
+    public Resp<SpuInfoEntity> querySpuById(@PathVariable("id") Long id);
+
     //根据SPUID查询SPU下的SKU
     @GetMapping("pms/skuinfo/{spuId}")
     public Resp<List<SkuInfoEntity>> querySkuBySpuId(@PathVariable("spuId")Long spuId);
     //根据品牌ID生成品牌
-    @GetMapping("pms/brand/{brandId}")
+    @GetMapping("pms/brand/info/{brandId}")
     public Resp<BrandEntity> queryBrandById(@PathVariable("brandId") Long brandId);
     //根据分类ID查询分类
-    @GetMapping("pms/category/{catId}")
+    @GetMapping("pms/category/info/{catId}")
     public Resp<CategoryEntity> queryCategoryById(@PathVariable("catId") Long catId);
     //
     @GetMapping("pms/productattrvalue/{spuId}")

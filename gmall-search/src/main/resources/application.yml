@@ -10,3 +10,8 @@ spring:
       uris: http://123.57.205.173:9200
   jackson:
     default-property-inclusion: non_null
+  rabbitmq:
+    host: 123.57.205.173
+    username: guest
+    password: guest
+    virtual-host: /
