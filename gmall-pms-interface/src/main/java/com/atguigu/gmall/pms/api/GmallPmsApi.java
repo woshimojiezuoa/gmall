@@ -4,12 +4,28 @@ import com.atguigu.core.bean.PageVo;
 import com.atguigu.core.bean.QueryCondition;
 import com.atguigu.core.bean.Resp;
 import com.atguigu.gmall.pms.entity.*;
+import com.atguigu.gmall.pms.vo.ItemGroupVo;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 public interface GmallPmsApi {
+    ////根据spuid和cateid查组及组下规格参数
+    @GetMapping("pms/attrgroup/item/group/{cid}/{spuid}")
+    public Resp<List<ItemGroupVo>> queryItemGroupVoByCidAndSpuId(@PathVariable("cid")Long cid, @PathVariable("spuId")Long spuId);
+    //查询海报
+    @GetMapping("pms/spuinfodesc/info/{spuId}")
+    public Resp<SpuInfoDescEntity> queryImagesBySpuId(@PathVariable("spuId") Long spuId);
+    //通过SPUID查询下面所有SKU的销售属性
+    @GetMapping("pms/skusaleattrvalue/{spuId}")
+    public Resp<List<SkuSaleAttrValueEntity>> querySkuSaleAttrValueList(@PathVariable("skuId")Long spuId);
+    //通过SKUID查询图片列表
+    @GetMapping("pms/skuimages/{skuId}")
+    public Resp<List<SkuImagesEntity>> querySkuImages(@PathVariable("skuId")Long skuId);
+    //通过SKUID查询SKU
+    @GetMapping("pms/skuinfo/info/{skuId}")
+    public Resp<SkuInfoEntity> querySkuBySkuId(@PathVariable("skuId") Long skuId);
     //分页查询SPU
     @PostMapping("pms/spuinfo/page")
     public Resp<List<SpuInfoEntity>> queryspuById(@RequestBody QueryCondition condition);

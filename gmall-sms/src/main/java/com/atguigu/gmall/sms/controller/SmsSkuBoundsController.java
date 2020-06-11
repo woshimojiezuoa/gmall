@@ -1,11 +1,13 @@
 package com.atguigu.gmall.sms.controller;
 
 import java.util.Arrays;
+import java.util.List;
 
 
 import com.atguigu.core.bean.PageVo;
 import com.atguigu.core.bean.QueryCondition;
 import com.atguigu.core.bean.Resp;
+import dto.SaleVO;
 import dto.SkuSaleDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,6 +41,11 @@ public class SmsSkuBoundsController {
         this.smsSkuBoundsService.saveSkuSaleInfo(skuSaleDTO);
 
         return Resp.ok(null);
+    }
+    @GetMapping("{skuId}")
+    public Resp<List<SaleVO>> querySaleVoList(@PathVariable("skuId")Long skuId){
+        List<SaleVO> saleVOList = smsSkuBoundsService.querySaleVoList(skuId);
+        return Resp.ok(saleVOList);
     }
     /**
      * 列表

@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.atguigu.gmall.sms.entity.SmsSkuBoundsEntity;
 import com.atguigu.core.bean.PageVo;
 import com.atguigu.core.bean.QueryCondition;
+import dto.SaleVO;
 import dto.SkuSaleDTO;
+
+import java.util.List;
 
 
 /**
@@ -19,5 +22,7 @@ public interface SmsSkuBoundsService extends IService<SmsSkuBoundsEntity> {
     PageVo queryPage(QueryCondition params);
 
     void saveSkuSaleInfo(SkuSaleDTO skuSaleDTO);
+
+    List<SaleVO> querySaleVoList(Long skuId);
 }
 
