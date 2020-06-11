@@ -25,9 +25,9 @@ class GmallSearchApplicationTests {
     @Autowired
     private ElasticsearchRestTemplate elasticsearchresttemplate;
     @Autowired
-    private GmallPsmClient pmsClient;
-    @Autowired
     private GmallWsmClient wmsClient;
+    @Autowired
+    private GmallPsmClient pmsClient;
     @Autowired
     private GoodsResponitory goodsresponitory;
     @Test
@@ -38,6 +38,9 @@ class GmallSearchApplicationTests {
 
     @Test
     void inportData(){
+//        System.out.println("8888");
+//        System.out.println(wmsClient.toString());
+//        System.out.println(pmsClient.toString());
         Long pageNum = 1l;
         Long pageSize = 100l;
         do{
